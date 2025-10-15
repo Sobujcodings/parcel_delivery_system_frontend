@@ -1,19 +1,33 @@
+import { Button } from "@/components/ui/button";
+import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import { Link } from "react-router";
 
 
 const Navbar = () => {
+    //     const navigationLinks = [
+    //   { href: "/", label: "Home", role: "PUBLIC" },
+    //   { href: "/about", label: "About", role: "PUBLIC" },
+    //   { href: "/tours", label: "Tours", role: "PUBLIC" },
+    //   { href: "/admin", label: "Dashboard", role: role.admin },
+    //   { href: "/admin", label: "Dashboard", role: role.superAdmin },
+    //   { href: "/user", label: "Dashboard", role: role.user },
+    // ];
 
     const NavigationLinks = [
-        {
-            label: "Home", href: '/'
-        },
-        {
-            label: "About", href: '/about'
-        },
-        {
-            label: "Contact", href: '/contact'
-        },
+        { label: "Home", href: '/', role: "PUBLIC" },
+        { label: "About", href: '/about', role: "PUBLIC" },
+        { label: "Contact", href: '/contact', role: "PUBLIC" },
+        { label: "Dashboard", href: '/admin', role: "SENDER/RECEIVER/ADMIN" },
     ];
+
+
+    // calling the get query if here email exist then its valid token stay loggedIn user.
+    const { data } = useUserInfoQuery(undefined);
+    // console.log('userinfo', data?.user?.email);
+
+    const handleLogout = () => {
+        console.log('logout clicked');
+    };
 
     return (
         <header className="bg-teal-600 text-white">
@@ -41,23 +55,38 @@ const Navbar = () => {
                         </ul>
                     </nav>
 
+                    {/* login/logout */}
                     <div className="flex items-center gap-4">
-                        <div className="sm:flex sm:gap-4">
-                            <Link
-                                className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
-                                to="/login"
-                            >
-                                Login
-                            </Link>
+                        {data?.user?.email ?
+                            (
+                                <Button
+                                    onClick={handleLogout}
+                                    variant="outline"
+                                    className="text-sm text-black"
+                                >
+                                    Logout
+                                </Button>
+                            )
+                            :
+                            <div className="sm:flex sm:gap-4">
 
-                            <Link
-                                className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block"
-                                to="/register"
-                            >
-                                Register
-                            </Link>
-                        </div>
+                                <Link
+                                    className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
+                                    to="/login"
+                                >
+                                    Login
+                                </Link>
 
+                                <Link
+                                    className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block"
+                                    to="/register"
+                                >
+                                    Register
+                                </Link>
+                            </div>
+                        }
+
+                        {/* mobile responsive togglebar */}
                         <button
                             className="block rounded-sm bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden"
                         >
