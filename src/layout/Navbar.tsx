@@ -1,25 +1,17 @@
 import { Button } from "@/components/ui/button";
+import { role } from "@/constrants/role";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import { Link } from "react-router";
 
-
 const Navbar = () => {
-    //     const navigationLinks = [
-    //   { href: "/", label: "Home", role: "PUBLIC" },
-    //   { href: "/about", label: "About", role: "PUBLIC" },
-    //   { href: "/tours", label: "Tours", role: "PUBLIC" },
-    //   { href: "/admin", label: "Dashboard", role: role.admin },
-    //   { href: "/admin", label: "Dashboard", role: role.superAdmin },
-    //   { href: "/user", label: "Dashboard", role: role.user },
-    // ];
-
     const NavigationLinks = [
         { label: "Home", href: '/', role: "PUBLIC" },
         { label: "About", href: '/about', role: "PUBLIC" },
         { label: "Contact", href: '/contact', role: "PUBLIC" },
-        { label: "Dashboard", href: '/admin', role: "SENDER/RECEIVER/ADMIN" },
+        { label: "Dashboard", href: '/admin', role: role.admin },
+        { label: "Dashboard", href: '/sender', role: role.sender },
+        { label: "Dashboard", href: '/receiver', role: role.receiver },
     ];
-
 
     // calling the get query if here email exist then its valid token stay loggedIn user.
     const { data } = useUserInfoQuery(undefined);
@@ -46,10 +38,19 @@ const Navbar = () => {
                     <nav aria-label="Global" className="hidden md:block">
                         <ul className="flex items-center gap-6 text-sm">
                             {
-                                NavigationLinks.map((item) => (
-                                    <li key={item.label}>
-                                        <Link className="text-white transition hover:text-black" to={item.href}> {item.label} </Link>
-                                    </li>
+                                NavigationLinks.map((item, index) => (
+                                    <>
+                                        {item?.role === 'PUBLIC' && (
+                                            <li key={index}>
+                                                <Link className="text-white transition hover:text-black" to={item.href}> {item.label} </Link>
+                                            </li>
+                                        )}
+                                        {item?.role === data?.user?.role && (
+                                            <li key={index}>
+                                                <Link className="text-white transition hover:text-black" to={item.href}> {item.label} </Link>
+                                            </li>
+                                        )}
+                                    </>
                                 ))
                             }
                         </ul>

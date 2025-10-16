@@ -29,7 +29,7 @@ export default function Homepage() {
     // );
 
     return (
-        <section className="relative overflow-hidden py-32 min-h-screen">
+        <section className="relative overflow-hidden py-32 min-h-screen bg-black text-white">
             <div className="absolute inset-x-0 top-0 flex h-full w-full items-center justify-center opacity-100">
                 <img
                     alt="background"
@@ -46,7 +46,7 @@ export default function Homepage() {
                         <div>
                             <h1 className="mb-6 text-2xl font-bold tracking-tight text-pretty lg:text-5xl">
                                 Explore the beauty of{" "}
-                                <span className="text-primary">Bangladesh</span>
+                                <span className="text-white">Bangladesh</span>
                             </h1>
                             <p className="mx-auto max-w-3xl text-muted-foreground lg:text-xl">
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Elig

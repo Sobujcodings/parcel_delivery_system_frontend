@@ -11,5 +11,5 @@ createRoot(document.getElementById('root')!).render(
     <ReduxProvider store={store}>
       <RouterProvider router={router} />
     </ReduxProvider>
-  </StrictMode>,
+  </StrictMode>
 )
