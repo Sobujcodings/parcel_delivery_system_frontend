@@ -17,8 +17,8 @@ export const receiverSidebarItems: ISidebarItem[] = [
         title: "receiver",
         items: [
             {
-                title: "abc",
-                url: "abc",
+                title: "Incoming parcels",
+                url: "incoming-parcels",
                 component: About
             },
         ],

@@ -11,6 +11,10 @@ import { DashboardLayout } from "@/layout/DashboardLayout";
 import { adminSidebarItems } from "./adminSidebarItems";
 import { senderSidebarItems } from "./senderSidebarItems";
 import { receiverSidebarItems } from "./receiverSidebarItems";
+import { withAuth } from "@/utils/withAuth";
+import { role } from "@/constrants/role";
+import Unauthorized from "@/pages/Unauthorized";
+import type { Trole } from "@/types";
 
 export const router = createBrowserRouter([
     {
@@ -19,12 +23,13 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                Component: Homepage ,
+                Component: Homepage,
                 index: true
             },
             {
                 path: "/about",
                 Component: About
+                // Component: withAuth(About, role.admin)
             },
             {
                 path: "/contact",
@@ -38,12 +43,20 @@ export const router = createBrowserRouter([
                 path: "/register",
                 Component: Register
             },
+            {
+                path: "/unauthorized",
+                Component: Unauthorized
+            },
         ],
     },
+    
     // admin routes sender/reciever/admin
+    // check auth then let it go tothe component
+    // need to validate that by mannually entering the url wont go to the dashboard route if itsnot a valid user loggedIn.
     {
         path: '/admin',
-        Component: DashboardLayout,
+        Component: withAuth(DashboardLayout, role.admin as Trole),
+        // Component: DashboardLayout,
         children: [
             { index: true, element: <Navigate to="/admin/view-all-parcels" /> },
             ...generateRoutes(adminSidebarItems)
@@ -51,8 +64,7 @@ export const router = createBrowserRouter([
     },
     {
         path: '/sender',
-        // need to validate that by mannually entering the url wont go to the dashboard route if itsnot a valid user loggedIn.
-        Component: DashboardLayout,
+        Component: withAuth(DashboardLayout, role.sender as Trole),
         children: [
             { index: true, element: <Navigate to="/sender/view-parcels" /> },
             ...generateRoutes(senderSidebarItems)
@@ -60,7 +72,7 @@ export const router = createBrowserRouter([
     },
     {
         path: '/receiver',
-        Component: DashboardLayout,
+        Component: withAuth(DashboardLayout, role.receiver as Trole),
         children: [
             { index: true, element: <Navigate to="/receiver/incoming-parcels" /> },
             ...generateRoutes(receiverSidebarItems)
