@@ -7,7 +7,7 @@ import { toast } from "sonner";
 export const withAuth = (Component: ComponentType, requiredRole: Trole) => {
     return function authWrapper() {
         const { data, isLoading } = useUserInfoQuery(undefined);
-        console.log('inside auth', data);
+        // console.log('inside auth', data);
 
         // if(isLoading){
         //     console.log('loading...');

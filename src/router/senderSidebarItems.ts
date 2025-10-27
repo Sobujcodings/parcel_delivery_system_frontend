@@ -1,4 +1,4 @@
-import About from "@/layout/About";
+import createParcel from "@/pages/SenderPages/CreateParcel";
 import type { ISidebarItem } from "@/types";
 
 export const senderSidebarItems: ISidebarItem[] = [
@@ -9,7 +9,7 @@ export const senderSidebarItems: ISidebarItem[] = [
         title: "create a parcel",
         url: "create-parcel",
         isActive: true,
-        component: About,
+        component: createParcel,
       },
     ],
   },

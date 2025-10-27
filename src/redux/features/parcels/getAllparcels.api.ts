@@ -25,7 +25,26 @@ const authApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    getIncomingParcels: builder.query({
+      query: () => ({
+        url: "/parcels/incoming-parcels",
+        method: "GET",
+      }),
+    }),
+    CreateParcel: builder.mutation({
+      query: (createParcelInfo) => ({
+        url: "/parcels",
+        method: "POST",
+        body: createParcelInfo,
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation, useGetAllparcelsQuery, useGetUsersQuery } = authApi;
+export const {
+  useLoginMutation,
+  useGetAllparcelsQuery,
+  useGetUsersQuery,
+  useGetIncomingParcelsQuery,
+  useCreateParcelMutation
+} = authApi;
