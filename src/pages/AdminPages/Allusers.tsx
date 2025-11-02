@@ -1,15 +1,27 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from '@/components/ui/button';
-import { useGetUsersQuery } from "@/redux/features/parcels/getAllparcels.api";
+import { useBlockUserMutation, useGetUsersQuery } from "@/redux/features/parcels/getAllparcels.api";
 import type { user } from "@/types";
 import { Spinner } from '@/components/ui/spinner';
 
 export const Allusers = () => {
     const { data: allUsers, isLoading } = useGetUsersQuery(undefined);
-    console.log('users', allUsers);
+    const [updatedUser, { data, isLoading: updatedUserLoading }] = useBlockUserMutation(undefined);
+
+    // change user active status
+    const handleBlockUser = async (user: unknown) => {
+        const isActive = user?.isActive === 'BLOCKED' ? 'ACTIVE' : 'BLOCKED';
+        const post_data = {
+            _id: user?._id,
+            email: user?.email,
+            isActive: isActive
+        };
+        const response = await updatedUser(post_data).unwrap();
+        // console.log('response', response);
+    };
 
     return (
-        isLoading ?
+        isLoading || updatedUserLoading ?
             (<div className="min-h-screen flex flex-col justify-center align-middle items-center gap-4">
                 <Spinner />
             </div>)
@@ -26,6 +38,7 @@ export const Allusers = () => {
                             <TableHead className="border text-center">is_Active</TableHead>
                             <TableHead className="border text-center">is_Verified</TableHead>
                             <TableHead className="border text-center">created_At</TableHead>
+                            <TableHead className="border text-center">active_status</TableHead>
                             <TableHead className="border text-center">
                                 Action
                             </TableHead>
@@ -60,8 +73,11 @@ export const Allusers = () => {
                                     {singleUser.createdAt}
                                 </TableCell>
                                 <TableCell className="border text-center">
+                                    {singleUser.isActive}
+                                </TableCell>
+                                <TableCell className="border text-center">
                                     <div className="flex flex-col gap-2">
-                                        <Button>
+                                        <Button onClick={() => handleBlockUser(singleUser)}>
                                             {(singleUser.isActive === 'BLOCKED') ? 'Unblock' : 'Block'}
                                         </Button>
                                     </div>

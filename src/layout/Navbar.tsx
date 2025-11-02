@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { role } from "@/constrants/role";
-import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
+import { useLogoutMutation, useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import { Link } from "react-router";
+import { toast } from "sonner";
 
 const Navbar = () => {
     const NavigationLinks = [
@@ -17,8 +18,28 @@ const Navbar = () => {
     const { data } = useUserInfoQuery(undefined);
     // console.log('userinfo', data?.user?.email);
 
-    const handleLogout = () => {
-        console.log('logout clicked');
+    // logout functionality
+    const [logout, { data: response, isLoading }] = useLogoutMutation(undefined);
+    const handleLogout = async () => {
+        try {
+            const response = await logout(undefined).unwrap();
+            console.log('rsponse', response);
+            toast("✅ User login successfull", {
+                description: response.message,
+                action: {
+                    label: "Close",
+                    onClick: () => console.log("close clicked"),
+                },
+            });
+        } catch (error) {
+            console.log('error', error);
+            toast("✅ User login successfull", {
+                action: {
+                    label: "Close",
+                    onClick: () => console.log("close clicked"),
+                },
+            });
+        };
     };
 
     return (

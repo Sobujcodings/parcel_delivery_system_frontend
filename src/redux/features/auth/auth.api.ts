@@ -1,7 +1,3 @@
-// ekhane api r shob kaj korte hobe.
-// api/v1/auth/login
-// api/v1/auth/register
-
 import { baseApi } from "@/redux/baseApi";
 
 const authApi = baseApi.injectEndpoints({
@@ -19,14 +15,30 @@ const authApi = baseApi.injectEndpoints({
         method: "POST",
         body: userInfo,
       }),
+      // tells RTK Query to invalid this tag then refetch any query providing 'User'.
+      invalidatesTags: ["User"],
     }),
     userInfo: builder.query({
       query: () => ({
         url: "/user/me",
         method: "GET",
       }),
+      // so it's refetched when invalidated
+      providesTags: ["User"],
+    }),
+    logout: builder.mutation({
+      query: () => ({
+        url: "/auth/logout",
+        method: "POST",
+      }),
+      invalidatesTags: ["User"],
     }),
   }),
 });
 
-export const { useRegisterMutation, useLoginMutation, useUserInfoQuery } = authApi;
+export const {
+  useRegisterMutation,
+  useLoginMutation,
+  useUserInfoQuery,
+  useLogoutMutation,
+} = authApi;
