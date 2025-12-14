@@ -52,7 +52,7 @@ export function RegisterForm({
             <form className="space-y-5"
               onSubmit={form.handleSubmit(onSubmit)}
             >
-              <FieldGroup>
+              <FieldGroup className="gap-4">
                 <div className="flex flex-col items-center gap-2 text-center">
                   <h1 className="text-2xl font-bold">Welcome back</h1>
                   <p className="text-muted-foreground text-balance">
@@ -118,7 +118,16 @@ export function RegisterForm({
                     <FormItem>
                       <FormLabel>Role</FormLabel>
                       <FormControl>
-                        <Input placeholder="role" {...field} />
+                        <select
+                          {...field}
+                          className="w-full rounded border border-gray-300 px-2 py-2"
+                        >
+                          <option value="" className="text-muted-foreground text-balance">Select a role</option>
+                          <option value="ADMIN">ADMIN</option>
+                          <option value="RECEIVER">RECEIVER</option>
+                          <option value="SENDER">SENDER</option>
+                        </select>
+                          {/* <Input placeholder="role" {...field} /> */}
                       </FormControl>
                       <FormMessage />
                     </FormItem>

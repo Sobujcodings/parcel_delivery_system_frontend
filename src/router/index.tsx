@@ -4,7 +4,6 @@ import About from "@/layout/About";
 import Contact from "@/layout/Contact";
 import Login from "@/layout/Login";
 import Register from "@/layout/Register";
-import Homepage from "@/pages/Homepages/HomePage";
 import { createBrowserRouter, Navigate } from "react-router";
 import { generateRoutes } from "@/utils/generateRoutes";
 import { DashboardLayout } from "@/layout/DashboardLayout";
@@ -15,6 +14,7 @@ import { withAuth } from "@/utils/withAuth";
 import { role } from "@/constrants/role";
 import Unauthorized from "@/pages/Unauthorized";
 import type { Trole } from "@/types";
+import Homepage from "@/pages/Homepages/HomePage";
 
 export const router = createBrowserRouter([
     {

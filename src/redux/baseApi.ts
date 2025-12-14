@@ -4,6 +4,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
+    // baseUrl: "https://assignment-5-percel-delivery-system-ph555sgt2.vercel.app/api/v1",
     baseUrl: "http://localhost:5000/api/v1",
     // allow browser to get cookies from diff origin/domain
     credentials: "include",

@@ -17,18 +17,16 @@ const Footer = () => {
                     <div className="mt-8 grid grid-cols-2 gap-8 lg:mt-0 lg:grid-cols-5 lg:gap-y-16">
                         <div className="col-span-2">
                             <div>
-                                <h2 className="text-2xl font-bold text-white">Get the latest news!</h2>
+                                <h2 className="text-2xl font-bold text-white">Manage your percels Now!</h2>
                                 <p className="mt-4 text-gray-300">
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse non cupiditate quae nam
-                                    molestias.
-                                </p>
+                                    Send, track, and receive parcels with secure, timely delivery.                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="mt-8 border-t border-gray-100 pt-8">
                     <div className="sm:flex sm:justify-between">
-                        <p className="text-xs text-white">&copy; 2022. Company Name. All rights reserved.</p>
+                        <p className="text-xs text-white">&copy; 2025. GetYourPercelByMeraj. All rights reserved.</p>
 
                         <ul className="mt-8 flex flex-wrap justify-start gap-4 text-xs sm:mt-0 lg:justify-end">
                             <li>

@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-// import { Button } from "@/components/ui/button"
-
 import { Outlet } from "react-router"
 import Navbar from "./layout/Navbar"
 import Footer from "./layout/Footer"
 import { Toaster } from "sonner"
 import ScrollToTop from "./components/ui/scrolltoTop"
 import { Spinner } from "./components/ui/spinner"
+
+// homepage ta thik koro --> heroSection add koro --> banner r text thik koro
+// about, contact page thik koro --> text + content 
+// deploy koro --> beckend(already kora ache abar update hoye new url ta frontend e boshbe then frontend deploy koro) + frontend
 
 function App() {
   return (
